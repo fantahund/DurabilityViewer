@@ -33,7 +33,7 @@ import net.minecraft.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Matrix4fStack;
-import team.reborn.energy.EnergyHolder;
+import team.reborn.energy.api.EnergyStorage;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -94,7 +94,7 @@ public class GuiItemDurability {
             trinketWarners = new ItemBreakingWarner[0];
         }
         try {
-            Class.forName("team.reborn.energy.EnergyHolder");
+            Class.forName("team.reborn.energy.api.EnergyStorage");
             haveTRCore = true;
         } catch (ClassNotFoundException ex) {
             LOGGER.info("DurabilityViewer did not find Tech Reborn");
