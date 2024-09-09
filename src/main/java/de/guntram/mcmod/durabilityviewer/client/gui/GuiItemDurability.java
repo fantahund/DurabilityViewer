@@ -36,6 +36,7 @@ import org.joml.Matrix4fStack;
 import team.reborn.energy.EnergyHolder;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -183,6 +184,9 @@ public class GuiItemDurability {
         ItemIndicator[] trinkets;
         if (haveTrinketsApi) {
             List<ItemStack> equipped = getTrinkets(player);
+            if (equipped == null) {
+                equipped = Collections.emptyList();
+            }
 
             trinkets = new ItemIndicator[equipped.size()];
             if (trinkets.length > trinketWarners.length) {
