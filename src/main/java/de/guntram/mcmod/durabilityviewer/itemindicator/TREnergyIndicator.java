@@ -7,7 +7,8 @@ package de.guntram.mcmod.durabilityviewer.itemindicator;
 
 import de.guntram.mcmod.durabilityviewer.config.Configs;
 import net.minecraft.item.ItemStack;
-import team.reborn.energy.EnergyHolder;
+import team.reborn.energy.api.EnergyStorage;
+import team.reborn.energy.api.base.SimpleEnergyItem;
 
 /**
  * @author gbl
@@ -19,8 +20,8 @@ public class TREnergyIndicator implements ItemIndicator {
 
     public TREnergyIndicator(ItemStack stack) {
         this.stack = stack;
-        if (stack.getItem() instanceof EnergyHolder) {
-            maxEnergy = ((EnergyHolder) stack.getItem()).getMaxStoredPower();
+        if (stack.getItem() instanceof EnergyStorage) {
+            maxEnergy = ((EnergyStorage) stack.getItem()).getCapacity();
         } else {
             maxEnergy = 0;
         }
@@ -32,6 +33,7 @@ public class TREnergyIndicator implements ItemIndicator {
         /*if (stack.getNbt() != null) {
            energy = stack.getNbt().getDouble("energy");
         }*/
+        energy = SimpleEnergyItem.getStoredEnergyUnchecked(stack);
         if (Configs.Settings.Percentages.getBooleanValue() && maxEnergy > 0) {
             return String.format("§o%.1f%%", energy / maxEnergy * 100);
         }
@@ -47,6 +49,7 @@ public class TREnergyIndicator implements ItemIndicator {
     @Override
     public int getDisplayColor() {
         double energy = 0.0;//stack.getNbt().getDouble("energy");
+        energy = SimpleEnergyItem.getStoredEnergyUnchecked(stack);
         if (energy > maxEnergy * 0.2) {
             return color_green;
         } else if (energy > maxEnergy * 0.1) {

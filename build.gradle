@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'fabric-loom' version '1.7.2'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "2.4.3"
 }
@@ -41,7 +41,7 @@ dependencies {
 
     modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-    modImplementation "TechReborn:TechReborn-1.16:3.4.5+build.95"
+    modApi("teamreborn:energy:4.1.0")
 
     //modImplementation "de.guntram.mcmod:GBfabrictools:${project.gbfabrictools_version}"
     //include "de.guntram.mcmod:GBfabrictools:${project.gbfabrictools_version}"
