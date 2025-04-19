@@ -91,7 +91,7 @@ public class GuiItemDurability {
 
     private int getInventoryArrowCount() {
         int arrows = 0;
-        for (final ItemStack stack : minecraft.player.getInventory().main) {
+        for (final ItemStack stack : minecraft.player.getInventory().getMainStacks()) {
             if (isArrow(stack)) {
                 arrows += stack.getCount();
             }

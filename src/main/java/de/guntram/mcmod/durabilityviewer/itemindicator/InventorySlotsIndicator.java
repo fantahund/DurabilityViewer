@@ -12,7 +12,7 @@ public class InventorySlotsIndicator implements ItemIndicator {
     public InventorySlotsIndicator(PlayerInventory inventory) {
         stack = new ItemStack(Blocks.CHEST);
         int slots = 0;
-        for (final ItemStack invitems : inventory.main) {
+        for (final ItemStack invitems : inventory.getMainStacks()) {
             if (invitems.isEmpty()) {
                 slots++;
             }
