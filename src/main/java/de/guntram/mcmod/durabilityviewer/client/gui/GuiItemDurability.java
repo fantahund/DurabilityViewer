@@ -270,7 +270,7 @@ public class GuiItemDurability {
             }
         }
 
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+        //RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f); //Fixme 1.21.6
 
         if (Configs.Settings.ArmorAroundHotbar.getBooleanValue()) {
             int leftOffset = -120;
@@ -333,7 +333,7 @@ public class GuiItemDurability {
 
         stack.popMatrix();
 
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+        //RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f); //Fixme 1.21.6
     }
 
     public void afterRenderStatusEffects(DrawContext context, float partialTicks) {
