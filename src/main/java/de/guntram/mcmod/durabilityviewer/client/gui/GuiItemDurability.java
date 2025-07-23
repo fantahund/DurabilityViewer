@@ -26,6 +26,7 @@ import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.RangedWeaponItem;
 import net.minecraft.util.Arm;
+import net.minecraft.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Matrix4fStack;
@@ -270,8 +271,6 @@ public class GuiItemDurability {
             }
         }
 
-        //RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f); //Fixme 1.21.6
-
         if (Configs.Settings.ArmorAroundHotbar.getBooleanValue()) {
             int leftOffset = -120;
             int rightOffset = 100;
@@ -332,8 +331,6 @@ public class GuiItemDurability {
         context.drawItem(itemStack, (int) ((xWarn) / scale - 8), (int) ((yWarn) / scale - 8));
 
         stack.popMatrix();
-
-        //RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f); //Fixme 1.21.6
     }
 
     public void afterRenderStatusEffects(DrawContext context, float partialTicks) {
@@ -397,6 +394,6 @@ public class GuiItemDurability {
 
     public List<ItemStack> getTrinkets(LivingEntity player) {
         Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-        return null;//component.map(trinketComponent -> trinketComponent.getEquipped(prdct -> true).stream().map(Pair::getRight).toList()).orElse(null);
+        return component.map(trinketComponent -> trinketComponent.getEquipped(prdct -> true).stream().map(Pair::getRight).toList()).orElse(null);
     }
 }
