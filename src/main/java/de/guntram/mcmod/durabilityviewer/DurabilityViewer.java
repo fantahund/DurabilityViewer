@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -46,7 +47,7 @@ public class DurabilityViewer implements ClientModInitializer {
     }
 
     public void setKeyBindings() {
-        final String category = "key.categories.durabilityviewer";
+        final KeyBinding.Category category = KeyBinding.Category.create(Identifier.of("key.categories.durabilityviewer")); //FIXME 1.21.10
         KeyBindingHelper.registerKeyBinding(showHide = new KeyBinding("key.durabilityviewer.showhide", InputUtil.Type.KEYSYM, GLFW_KEY_H, category));
         ClientTickEvents.END_CLIENT_TICK.register(e -> processKeyBinds());
     }

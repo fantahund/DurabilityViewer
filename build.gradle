@@ -60,7 +60,7 @@ java {
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${archiveBaseName}" }
+        rename { "${it}_${project.archives_base_name}" }
     }
 }
 
@@ -79,7 +79,7 @@ tasks.publish.dependsOn build
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId project.archivesBaseName
+            artifactId project.archives_base_name
 
             // add all the jars that should be included when publishing to maven
             //artifact(jar)             { builtBy remapJar }

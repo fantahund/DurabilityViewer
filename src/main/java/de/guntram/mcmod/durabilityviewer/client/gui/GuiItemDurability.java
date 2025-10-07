@@ -211,7 +211,7 @@ public class GuiItemDurability {
 
         // Moved this check to down here, in order to play the 
         // warning sound / do the visible 
-        if (!visible || minecraft.getDebugHud().shouldShowDebugHud()) {
+        if (!visible || minecraft.debugHudEntryList.isF3Enabled()) {
             return;
         }
 
