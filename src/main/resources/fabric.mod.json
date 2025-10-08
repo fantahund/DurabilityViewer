@@ -12,7 +12,9 @@
     ],
     "accessWidener" : "durabilityviewer.accesswidener",
     "depends": {
-        "fabric": "*"
+        "fabric": "*",
+        "minecraft": "*",
+        "malilib": "*"
     },
     "recommends": {
         "modmenu" : "*"
