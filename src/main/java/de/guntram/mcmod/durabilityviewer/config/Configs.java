@@ -38,6 +38,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBoolean ShowFreeInventorySlots = new ConfigBoolean("ShowFreeInventorySlots", true, Text.translatable("durabilityviewer.config.tt.showfreeslots").getString());
         public static final ConfigColor TooltipColor = new ConfigColor("TooltipColor", "#54FB54", Text.translatable("durabilityviewer.config.tt.tooltipcolor").getString());
         public static final ConfigOptionList WarningMode = new ConfigOptionList("WarningMode", WarnMode.SOUND, Text.translatable("durabilityviewer.config.tt.warnmode").getString());
+        public static final ConfigOptionList SoundCategory = new ConfigOptionList("SoundCategory", de.guntram.mcmod.durabilityviewer.config.SoundCategory.getDefault(), Text.translatable("durabilityviewer.config.tt.soundcategory").getString());
 
         public static final ImmutableList<IConfigBase> SETTINGS = ImmutableList.of(
                 ArmorAroundHotbar,
@@ -52,7 +53,8 @@ public class Configs implements IConfigHandler {
                 PercentToShowDamage,
                 ShowFreeInventorySlots,
                 TooltipColor,
-                WarningMode
+                WarningMode,
+                SoundCategory
         );
     }
 
