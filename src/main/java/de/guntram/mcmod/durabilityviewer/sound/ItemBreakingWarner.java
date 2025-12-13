@@ -9,9 +9,12 @@ import de.guntram.mcmod.durabilityviewer.DurabilityViewer;
 import de.guntram.mcmod.durabilityviewer.config.Configs;
 import de.guntram.mcmod.durabilityviewer.config.SoundCategory;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 
 
 /**
@@ -49,6 +52,14 @@ public class ItemBreakingWarner {
     }
 
     public static void playWarningSound() {
-        MinecraftClient.getInstance().player.playSoundToPlayer(sound, ((SoundCategory) Configs.Settings.SoundCategory.getOptionListValue()).getInternal(), 100, 100);
+        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        if (player == null) {
+            return;
+        }
+        ClientWorld world = MinecraftClient.getInstance().world;
+        if (world != null) {
+            world.playSound(player, player.getBlockPos(), sound, ((SoundCategory) Configs.Settings.SoundCategory.getOptionListValue()).getInternal(), 100, 100);
+        }
+
     }
 }
