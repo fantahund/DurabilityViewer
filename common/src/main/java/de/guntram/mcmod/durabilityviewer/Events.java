@@ -23,14 +23,14 @@ public class Events {
                 serverName = serverData.name;
             if (serverName == null)
                 serverName = "unknown server";
-            DurabilityViewer.setWindowTitle(mc.getUser().getName() + " on " + serverName);
+            //DurabilityViewer.setWindowTitle(mc.getUser().getName() + " on " + serverName); //FIXME
         });
 
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
             if (!Configs.Settings.SetWindowTitle.getBooleanValue())
                 return;
             Minecraft mc = Minecraft.getInstance();
-            DurabilityViewer.setWindowTitle(mc.getUser().getName() + " not connected");
+            //DurabilityViewer.setWindowTitle(mc.getUser().getName() + " not connected"); //FIXME
         });
     }
 }

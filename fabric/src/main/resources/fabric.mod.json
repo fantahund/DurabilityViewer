@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "durabilityviewer",
+  "version": "${version}",
+  "name": "Durability Viewer",
+  "description": "Shows various things about the game:\n- the remaining/missing durability on your armor and tools\n- the amount of arrows in your inventory when you're wielding a bow\n- the number of empty inventory slots\n- timeouts for status effects",
+  "authors": [
+    "Giselbaer",
+    "fantahund"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/durability-viewer-updated",
+    "sources": "https://github.com/fantahund/DurabilityViewer",
+    "issues": "https://github.com/fantahund/DurabilityViewer/issues"
+  },
+  "icon": "assets/durabilityviewer/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "de.guntram.mcmod.durabilityviewer.fabric.DurabilityViewerFabric"
+    ]
+  },
+  "accessWidener": "durabilityviewer.accesswidener",
+  "mixins": [
+    "mixins.durabilityviewer.json"
+  ],
+  "depends": {
+    "fabric": "*"
+  },
+  "recommends": {
+    "modmenu": "*"
+  }
+}

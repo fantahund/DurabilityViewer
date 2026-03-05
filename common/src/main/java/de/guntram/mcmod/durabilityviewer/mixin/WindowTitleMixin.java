@@ -5,7 +5,6 @@
  */
 package de.guntram.mcmod.durabilityviewer.mixin;
 
-import de.guntram.mcmod.durabilityviewer.DurabilityViewer;
 import de.guntram.mcmod.durabilityviewer.config.Configs;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,9 +21,9 @@ public class WindowTitleMixin {
     @Inject(method = "createTitle()Ljava/lang/String;", at = @At("HEAD"), cancellable = true)
     public final void getWindowTitle(CallbackInfoReturnable<String> cir) {
         if (Configs.Settings.SetWindowTitle.getBooleanValue()) {
-            if (DurabilityViewer.getWindowTitle() != null) {
+            /*if (DurabilityViewer.getWindowTitle() != null) {
                 cir.setReturnValue(DurabilityViewer.getWindowTitle());
-            }
+            }*/ //FIXME
         }
     }
 

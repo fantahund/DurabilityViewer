@@ -1,7 +1,6 @@
 package de.guntram.mcmod.durabilityviewer.config;
 
 import com.google.common.collect.ImmutableList;
-import de.guntram.mcmod.durabilityviewer.DurabilityViewer;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
@@ -16,7 +15,7 @@ public class ConfigGui extends GuiConfigsBase { //GuiBase.openGui(new ConfigGui(
     private static ConfigGuiTab tab = ConfigGuiTab.SETTINGS;
 
     public ConfigGui() {
-        super(10, 50, DurabilityViewer.MODID, null, "durabilityviewer.gui.title.configs");
+        super(10, 50, "DurabilityViewer.MODID", null, "durabilityviewer.gui.title.configs"); //FIXME
     }
 
     @Override

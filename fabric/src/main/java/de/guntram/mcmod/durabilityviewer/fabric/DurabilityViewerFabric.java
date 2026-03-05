@@ -1,7 +1,8 @@
-package de.guntram.mcmod.durabilityviewer;
+package de.guntram.mcmod.durabilityviewer.fabric;
 
+import com.mojang.blaze3d.platform.InputConstants;
+import de.guntram.mcmod.durabilityviewer.Events;
 import de.guntram.mcmod.durabilityviewer.client.gui.GuiItemDurability;
-import de.guntram.mcmod.durabilityviewer.config.Configs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -12,13 +13,11 @@ import org.apache.logging.log4j.Logger;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_H;
 
-import com.mojang.blaze3d.platform.InputConstants;
+public class DurabilityViewerFabric implements ClientModInitializer {
 
-public class DurabilityViewer implements ClientModInitializer {
     public static final String MODID = "durabilityviewer";
     public static final String MODNAME = "Durability Viewer";
 
-    public static DurabilityViewer instance;
     private static String changedWindowTitle;
     private KeyMapping showHide;
     public static final Logger LOGGER = LogManager.getLogger("DurabilityViewer");
@@ -28,7 +27,7 @@ public class DurabilityViewer implements ClientModInitializer {
         setKeyBindings();
         changedWindowTitle = null;
 
-        Configs.loadFromFile();
+        //Configs.loadFromFile(); //FIXME
 
         new Events().init(); //init Fabric Events
     }

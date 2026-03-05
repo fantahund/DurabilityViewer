@@ -1,0 +1,16 @@
+{
+  "package": "de.guntram.mcmod.durabilityviewer.mixin",
+  "required": true,
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "durabilityviewer.refmap.json",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "conformVisibility": true
+  },
+  "client": [
+    "PotionEffectsMixin",
+    "WindowTitleMixin"
+  ]
+}
