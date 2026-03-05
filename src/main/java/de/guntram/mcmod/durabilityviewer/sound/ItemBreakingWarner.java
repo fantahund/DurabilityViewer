@@ -8,13 +8,12 @@ package de.guntram.mcmod.durabilityviewer.sound;
 import de.guntram.mcmod.durabilityviewer.DurabilityViewer;
 import de.guntram.mcmod.durabilityviewer.config.Configs;
 import de.guntram.mcmod.durabilityviewer.config.SoundCategory;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.ItemStack;
 
 
 /**
@@ -31,16 +30,16 @@ public class ItemBreakingWarner {
         Identifier location;
 
         if (sound == null) {
-            location = Identifier.of(DurabilityViewer.MODID, "tool_breaking");
-            sound = SoundEvent.of(location);
+            location = Identifier.fromNamespaceAndPath(DurabilityViewer.MODID, "tool_breaking");
+            sound = SoundEvent.createVariableRangeEvent(location);
         }
     }
 
     public boolean checkBreaks(ItemStack stack) {
         lastStack = stack;
-        if (stack == null || !stack.isDamageable())
+        if (stack == null || !stack.isDamageableItem())
             return false;
-        int newDurability = stack.getMaxDamage() - stack.getDamage();
+        int newDurability = stack.getMaxDamage() - stack.getDamageValue();
         if (newDurability < lastDurability
                 && newDurability < Configs.Settings.SoundBelowDurability.getIntegerValue()
                 && newDurability * 100 / Configs.Settings.SoundBelowPercent.getIntegerValue() < stack.getMaxDamage()) {
@@ -52,14 +51,13 @@ public class ItemBreakingWarner {
     }
 
     public static void playWarningSound() {
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) {
             return;
         }
-        ClientWorld world = MinecraftClient.getInstance().world;
+        ClientLevel world = Minecraft.getInstance().level;
         if (world != null) {
-            world.playSound(player, player.getBlockPos(), sound, ((SoundCategory) Configs.Settings.SoundCategory.getOptionListValue()).getInternal(), 100, 100);
+            world.playSound(player, player.blockPosition(), sound, ((SoundCategory) Configs.Settings.SoundCategory.getOptionListValue()).getInternal(), 100, 100);
         }
-
     }
 }

@@ -1,6 +1,6 @@
 package de.guntram.mcmod.durabilityviewer.itemindicator;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public class ItemCountIndicator implements ItemIndicator {
     final ItemStack stack;

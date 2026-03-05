@@ -1,2 +1,2 @@
 accessWidener v1 named
-accessible method net/minecraft/client/MinecraftClient getWindowTitle ()Ljava/lang/String;
+accessible method net/minecraft/client/Minecraft createTitle ()Ljava/lang/String;

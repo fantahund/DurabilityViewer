@@ -1,8 +1,7 @@
 package de.guntram.mcmod.durabilityviewer.itemindicator;
 
-import net.minecraft.item.ItemStack;
-
 import java.awt.*;
+import net.minecraft.world.item.ItemStack;
 
 public interface ItemIndicator {
     int color_white = Color.WHITE.getRGB(),

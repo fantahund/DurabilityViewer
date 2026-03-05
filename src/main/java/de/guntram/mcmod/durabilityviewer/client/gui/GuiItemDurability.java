@@ -1,6 +1,7 @@
 package de.guntram.mcmod.durabilityviewer.client.gui;
 
 import com.google.common.collect.Ordering;
+import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import de.guntram.mcmod.durabilityviewer.config.Configs;
 import de.guntram.mcmod.durabilityviewer.config.WarnMode;
@@ -12,21 +13,6 @@ import de.guntram.mcmod.durabilityviewer.sound.ColytraBreakingWarner;
 import de.guntram.mcmod.durabilityviewer.sound.ItemBreakingWarner;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.util.Window;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArrowItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.RangedWeaponItem;
-import net.minecraft.util.Arm;
-import net.minecraft.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Matrix4fStack;
@@ -34,14 +20,28 @@ import org.joml.Matrix4fStack;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArrowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 
 
 public class GuiItemDurability {
 
     private static final Logger LOGGER = LogManager.getLogger();
-    private final MinecraftClient minecraft;
+    private final Minecraft minecraft;
     private static boolean visible;
-    private final TextRenderer fontRenderer;
+    private final Font fontRenderer;
     private final ItemRenderer itemRenderer;
 
     private long lastWarningTime;
@@ -63,8 +63,8 @@ public class GuiItemDurability {
     }
 
     public GuiItemDurability() {
-        minecraft = MinecraftClient.getInstance();
-        fontRenderer = minecraft.textRenderer;
+        minecraft = Minecraft.getInstance();
+        fontRenderer = minecraft.font;
         itemRenderer = minecraft.getItemRenderer();
         visible = true;
 
@@ -92,7 +92,7 @@ public class GuiItemDurability {
 
     private int getInventoryArrowCount() {
         int arrows = 0;
-        for (final ItemStack stack : minecraft.player.getInventory().getMainStacks()) {
+        for (final ItemStack stack : minecraft.player.getInventory().getNonEquipmentItems()) {
             if (isArrow(stack)) {
                 arrows += stack.getCount();
             }
@@ -101,15 +101,15 @@ public class GuiItemDurability {
     }
 
     private ItemStack getFirstArrowStack() {
-        if (isArrow(minecraft.player.getOffHandStack())) {
-            return minecraft.player.getOffHandStack();
+        if (isArrow(minecraft.player.getOffhandItem())) {
+            return minecraft.player.getOffhandItem();
         }
-        if (isArrow(minecraft.player.getMainHandStack())) {
-            return minecraft.player.getMainHandStack();
+        if (isArrow(minecraft.player.getMainHandItem())) {
+            return minecraft.player.getMainHandItem();
         }
-        int size = minecraft.player.getInventory().size();
+        int size = minecraft.player.getInventory().getContainerSize();
         for (int i = 0; i < size; ++i) {
-            final ItemStack itemstack = minecraft.player.getInventory().getStack(i);
+            final ItemStack itemstack = minecraft.player.getInventory().getItem(i);
             if (this.isArrow(itemstack)) {
                 return itemstack;
             }
@@ -135,39 +135,39 @@ public class GuiItemDurability {
         left, over, right;
     }
 
-    public void onRenderGameOverlayPost(DrawContext context, float partialTicks) {
+    public void onRenderGameOverlayPost(GuiGraphics context, float partialTicks) {
 
-        PlayerEntity player = minecraft.player;
+        Player player = minecraft.player;
         ItemStack needToWarn = null;
 
         ItemIndicator mainHand, offHand;
         mainHand = damageOrEnergy(player, EquipmentSlot.MAINHAND);
         offHand = damageOrEnergy(player, EquipmentSlot.OFFHAND);
 
-        ItemStack chestItem = player.getEquippedStack(EquipmentSlot.CHEST);
+        ItemStack chestItem = player.getItemBySlot(EquipmentSlot.CHEST);
         ItemIndicator colytra = null;
         /*if (chestItem != null && chestItem.getNbt() != null && chestItem.getNbt().contains("colytra:ElytraUpgrade")) {
             colytra = new ColytraDamageIndicator(chestItem);
         }*/
 
-        ItemIndicator boots = new ItemDamageIndicator(player.getEquippedStack(EquipmentSlot.FEET));
-        ItemIndicator leggings = new ItemDamageIndicator(player.getEquippedStack(EquipmentSlot.LEGS));
+        ItemIndicator boots = new ItemDamageIndicator(player.getItemBySlot(EquipmentSlot.FEET));
+        ItemIndicator leggings = new ItemDamageIndicator(player.getItemBySlot(EquipmentSlot.LEGS));
         ItemIndicator chestplate = new ItemDamageIndicator(chestItem);
-        ItemIndicator helmet = new ItemDamageIndicator(player.getEquippedStack(EquipmentSlot.HEAD));
+        ItemIndicator helmet = new ItemDamageIndicator(player.getItemBySlot(EquipmentSlot.HEAD));
         ItemIndicator arrows = null;
         ItemIndicator invSlots = (Configs.Settings.ShowFreeInventorySlots.getBooleanValue() ? new InventorySlotsIndicator(minecraft.player.getInventory()) : null);
 
-        if (mainHandWarner.checkBreaks(player.getEquippedStack(EquipmentSlot.MAINHAND)))
-            needToWarn = player.getEquippedStack(EquipmentSlot.MAINHAND);
-        if (needToWarn == null && offHandWarner.checkBreaks(player.getEquippedStack(EquipmentSlot.OFFHAND)))
-            needToWarn = player.getEquippedStack(EquipmentSlot.OFFHAND);
-        if (needToWarn == null && bootsWarner.checkBreaks(player.getEquippedStack(EquipmentSlot.FEET)))
-            needToWarn = player.getEquippedStack(EquipmentSlot.FEET);
-        if (needToWarn == null && pantsWarner.checkBreaks(player.getEquippedStack(EquipmentSlot.LEGS)))
-            needToWarn = player.getEquippedStack(EquipmentSlot.LEGS);
+        if (mainHandWarner.checkBreaks(player.getItemBySlot(EquipmentSlot.MAINHAND)))
+            needToWarn = player.getItemBySlot(EquipmentSlot.MAINHAND);
+        if (needToWarn == null && offHandWarner.checkBreaks(player.getItemBySlot(EquipmentSlot.OFFHAND)))
+            needToWarn = player.getItemBySlot(EquipmentSlot.OFFHAND);
+        if (needToWarn == null && bootsWarner.checkBreaks(player.getItemBySlot(EquipmentSlot.FEET)))
+            needToWarn = player.getItemBySlot(EquipmentSlot.FEET);
+        if (needToWarn == null && pantsWarner.checkBreaks(player.getItemBySlot(EquipmentSlot.LEGS)))
+            needToWarn = player.getItemBySlot(EquipmentSlot.LEGS);
         if (needToWarn == null && chestWarner.checkBreaks(chestItem)) needToWarn = chestItem;
-        if (needToWarn == null && helmetWarner.checkBreaks(player.getEquippedStack(EquipmentSlot.HEAD)))
-            needToWarn = player.getEquippedStack(EquipmentSlot.HEAD);
+        if (needToWarn == null && helmetWarner.checkBreaks(player.getItemBySlot(EquipmentSlot.HEAD)))
+            needToWarn = player.getItemBySlot(EquipmentSlot.HEAD);
         if (needToWarn == null && colytraWarner.checkBreaks(chestItem)) needToWarn = chestItem;
 
         ItemIndicator[] trinkets;
@@ -211,17 +211,17 @@ public class GuiItemDurability {
 
         // Moved this check to down here, in order to play the 
         // warning sound / do the visible 
-        if (!visible || minecraft.debugHudEntryList.isF3Enabled()) {
+        if (!visible || minecraft.debugEntries.isOverlayVisible()) {
             return;
         }
 
 
-        if (mainHand.getItemStack().getItem() instanceof RangedWeaponItem
-                || offHand.getItemStack().getItem() instanceof RangedWeaponItem) {
+        if (mainHand.getItemStack().getItem() instanceof ProjectileWeaponItem
+                || offHand.getItemStack().getItem() instanceof ProjectileWeaponItem) {
             arrows = new ItemCountIndicator(getFirstArrowStack(), getInventoryArrowCount());
         }
 
-        Window mainWindow = MinecraftClient.getInstance().getWindow();
+        Window mainWindow = Minecraft.getInstance().getWindow();
         RenderSize armorSize, toolsSize, trinketsSize;
         if (Configs.Settings.ArmorAroundHotbar.getBooleanValue()) {
             armorSize = new RenderSize(0, 0);
@@ -249,7 +249,7 @@ public class GuiItemDurability {
                 ypos = 5;
             }
             case TOP_RIGHT -> {
-                xposArmor = mainWindow.getScaledWidth() - 5 - armorSize.width;
+                xposArmor = mainWindow.getGuiScaledWidth() - 5 - armorSize.width;
                 xposTools = xposArmor - toolsSize.width;
                 xposTrinkets = xposTools - trinketsSize.width;
                 ypos = 60;   // below buff/debuff effects
@@ -258,13 +258,13 @@ public class GuiItemDurability {
                 xposArmor = 5;
                 xposTools = 5 + armorSize.width;
                 xposTrinkets = 5 + armorSize.width + trinketsSize.width;
-                ypos = mainWindow.getScaledHeight() - 5 - totalHeight;
+                ypos = mainWindow.getGuiScaledHeight() - 5 - totalHeight;
             }
             case BOTTOM_RIGHT -> {
-                xposArmor = mainWindow.getScaledWidth() - 5 - armorSize.width;
-                xposTools = mainWindow.getScaledWidth() - 5 - armorSize.width - toolsSize.width;
+                xposArmor = mainWindow.getGuiScaledWidth() - 5 - armorSize.width;
+                xposTools = mainWindow.getGuiScaledWidth() - 5 - armorSize.width - toolsSize.width;
                 xposTrinkets = xposTools - trinketsSize.width;
-                ypos = mainWindow.getScaledHeight() - 5 - totalHeight;
+                ypos = mainWindow.getGuiScaledHeight() - 5 - totalHeight;
             }
             default -> {
                 return;
@@ -274,23 +274,23 @@ public class GuiItemDurability {
         if (Configs.Settings.ArmorAroundHotbar.getBooleanValue()) {
             int leftOffset = -120;
             int rightOffset = 100;
-            if (!player.getEquippedStack(EquipmentSlot.OFFHAND).isEmpty()) {
-                if (minecraft.options.getMainArm().getValue() == Arm.RIGHT) {
+            if (!player.getItemBySlot(EquipmentSlot.OFFHAND).isEmpty()) {
+                if (minecraft.options.mainHand().get() == HumanoidArm.RIGHT) {
                     leftOffset -= 20;
                 } else {
                     rightOffset += 20;
                 }
             }
-            int helmetTextWidth = fontRenderer.getWidth(helmet.getDisplayValue());
-            int chestTextWidth = fontRenderer.getWidth(chestplate.getDisplayValue());
-            this.renderItems(context, mainWindow.getScaledWidth() / 2 + leftOffset - helmetTextWidth, mainWindow.getScaledHeight() - iconHeight * 2 - 2, true, RenderPos.left, helmetTextWidth + iconWidth + spacing, helmet);
-            this.renderItems(context, mainWindow.getScaledWidth() / 2 + leftOffset - chestTextWidth, mainWindow.getScaledHeight() - iconHeight - 2, true, RenderPos.left, chestTextWidth + iconWidth + spacing, chestplate);
+            int helmetTextWidth = fontRenderer.width(helmet.getDisplayValue());
+            int chestTextWidth = fontRenderer.width(chestplate.getDisplayValue());
+            this.renderItems(context, mainWindow.getGuiScaledWidth() / 2 + leftOffset - helmetTextWidth, mainWindow.getGuiScaledHeight() - iconHeight * 2 - 2, true, RenderPos.left, helmetTextWidth + iconWidth + spacing, helmet);
+            this.renderItems(context, mainWindow.getGuiScaledWidth() / 2 + leftOffset - chestTextWidth, mainWindow.getGuiScaledHeight() - iconHeight - 2, true, RenderPos.left, chestTextWidth + iconWidth + spacing, chestplate);
             if (colytra != null) {
-                int colytraTextWidth = fontRenderer.getWidth(colytra.getDisplayValue());
-                this.renderItems(context, mainWindow.getScaledWidth() / 2 + leftOffset - chestTextWidth - colytraTextWidth - iconWidth, mainWindow.getScaledHeight() - iconHeight - 2, true, RenderPos.left, colytraTextWidth + iconWidth + spacing, colytra);
+                int colytraTextWidth = fontRenderer.width(colytra.getDisplayValue());
+                this.renderItems(context, mainWindow.getGuiScaledWidth() / 2 + leftOffset - chestTextWidth - colytraTextWidth - iconWidth, mainWindow.getGuiScaledHeight() - iconHeight - 2, true, RenderPos.left, colytraTextWidth + iconWidth + spacing, colytra);
             }
-            this.renderItems(context, mainWindow.getScaledWidth() / 2 + rightOffset, mainWindow.getScaledHeight() - iconHeight * 2 - 2, true, RenderPos.right, armorSize.width, leggings);
-            this.renderItems(context, mainWindow.getScaledWidth() / 2 + rightOffset, mainWindow.getScaledHeight() - iconHeight - 2, true, RenderPos.right, armorSize.width, boots);
+            this.renderItems(context, mainWindow.getGuiScaledWidth() / 2 + rightOffset, mainWindow.getGuiScaledHeight() - iconHeight * 2 - 2, true, RenderPos.right, armorSize.width, leggings);
+            this.renderItems(context, mainWindow.getGuiScaledWidth() / 2 + rightOffset, mainWindow.getGuiScaledHeight() - iconHeight - 2, true, RenderPos.right, armorSize.width, boots);
             if (corner.isRight()) {
                 xposTools += armorSize.width;
             } else {
@@ -303,9 +303,9 @@ public class GuiItemDurability {
         this.renderItems(context, xposTrinkets, ypos, true, corner.isRight() ? RenderPos.right : RenderPos.left, trinketsSize.width, trinkets);
     }
 
-    private ItemIndicator damageOrEnergy(PlayerEntity player, EquipmentSlot slot) {
-        ItemStack stack = player.getEquippedStack(slot);
-        if (stack.isDamageable()) {
+    private ItemIndicator damageOrEnergy(Player player, EquipmentSlot slot) {
+        ItemStack stack = player.getItemBySlot(slot);
+        if (stack.isDamageableItem()) {
             return new ItemDamageIndicator(stack);
         } else if (haveTRCore) {
             /*if (stack.getItem() instanceof EnergyHolder && stack.getNbt() != null && stack.getNbt().contains("energy", 6)) {
@@ -315,34 +315,34 @@ public class GuiItemDurability {
         return new ItemDamageIndicator(stack);
     }
 
-    private void renderItemBreakingOverlay(DrawContext context, ItemStack itemStack, long timeDelta) {
-        Window mainWindow = MinecraftClient.getInstance().getWindow();
+    private void renderItemBreakingOverlay(GuiGraphics context, ItemStack itemStack, long timeDelta) {
+        Window mainWindow = Minecraft.getInstance().getWindow();
         float alpha = 1.0f - ((float) timeDelta / 1000.0f);
-        float xWarn = mainWindow.getScaledWidth() / 2f;
-        float yWarn = mainWindow.getScaledHeight() / 2f;
+        float xWarn = mainWindow.getGuiScaledWidth() / 2f;
+        float yWarn = mainWindow.getGuiScaledHeight() / 2f;
         float scale = 5.0f;
 
-        context.fill(0, 0, mainWindow.getScaledWidth(), mainWindow.getScaledHeight(), 0xff0000 + ((int) (alpha * 128) << 24));
+        context.fill(0, 0, mainWindow.getGuiScaledWidth(), mainWindow.getGuiScaledHeight(), 0xff0000 + ((int) (alpha * 128) << 24));
 
         Matrix4fStack stack = RenderSystem.getModelViewStack();
         stack.pushMatrix();
         stack.scale(scale, scale, scale);
 
-        context.drawItem(itemStack, (int) ((xWarn) / scale - 8), (int) ((yWarn) / scale - 8));
+        context.renderItem(itemStack, (int) ((xWarn) / scale - 8), (int) ((yWarn) / scale - 8));
 
         stack.popMatrix();
     }
 
-    public void afterRenderStatusEffects(DrawContext context, float partialTicks) {
+    public void afterRenderStatusEffects(GuiGraphics context, float partialTicks) {
         if (Configs.Settings.EffectDuration.getBooleanValue()) {
             // a lot of this is copied from net/minecraft/client/gui/GuiIngame.java
-            Window mainWindow = MinecraftClient.getInstance().getWindow();
-            Collection<StatusEffectInstance> collection = minecraft.player.getStatusEffects();
+            Window mainWindow = Minecraft.getInstance().getWindow();
+            Collection<MobEffectInstance> collection = minecraft.player.getActiveEffects();
             int posGood = 0, posBad = 0;
-            for (StatusEffectInstance potioneffect : Ordering.natural().reverse().sortedCopy(collection)) {
-                if (potioneffect.shouldShowIcon()) {
-                    StatusEffect potion = potioneffect.getEffectType().value();
-                    int xpos = mainWindow.getScaledWidth();
+            for (MobEffectInstance potioneffect : Ordering.natural().reverse().sortedCopy(collection)) {
+                if (potioneffect.showIcon()) {
+                    MobEffect potion = potioneffect.getEffect().value();
+                    int xpos = mainWindow.getGuiScaledWidth();
                     int ypos;
                     if (potion.isBeneficial()) {     // isBeneficial
                         posGood += 25;
@@ -359,25 +359,25 @@ public class GuiItemDurability {
                         show = (duration / 1200) + "m";
                     else
                         show = (duration / 20) + "s";
-                    context.drawText(fontRenderer, show, xpos + 2, ypos, ItemIndicator.color_yellow, true);
+                    context.drawString(fontRenderer, show, xpos + 2, ypos, ItemIndicator.color_yellow, true);
                 }
             }
         }
     }
 
-    private RenderSize renderItems(DrawContext context, int xpos, int ypos, boolean reallyDraw, RenderPos numberPos, int maxWidth, ItemIndicator... items) {
+    private RenderSize renderItems(GuiGraphics context, int xpos, int ypos, boolean reallyDraw, RenderPos numberPos, int maxWidth, ItemIndicator... items) {
         RenderSize result = new RenderSize(0, 0);
 
         for (ItemIndicator item : items) {
             if (item != null && !item.isEmpty() && item.isItemStackDamageable()) {
                 String displayString = item.getDisplayValue();
-                int width = fontRenderer.getWidth(displayString);
+                int width = fontRenderer.width(displayString);
                 if (width > result.width)
                     result.width = width;
                 if (reallyDraw) {
                     int color = item.getDisplayColor();
-                    context.drawItem(item.getItemStack(), numberPos == RenderPos.left ? xpos + maxWidth - iconWidth - spacing : xpos, ypos + result.height);
-                    context.drawText(fontRenderer, displayString, numberPos != RenderPos.right ? xpos : xpos + iconWidth + spacing, (int) (ypos + result.height + fontRenderer.fontHeight / 2f + (numberPos == RenderPos.over ? 10 : 0)), color, true);
+                    context.renderItem(item.getItemStack(), numberPos == RenderPos.left ? xpos + maxWidth - iconWidth - spacing : xpos, ypos + result.height);
+                    context.drawString(fontRenderer, displayString, numberPos != RenderPos.right ? xpos : xpos + iconWidth + spacing, (int) (ypos + result.height + fontRenderer.lineHeight / 2f + (numberPos == RenderPos.over ? 10 : 0)), color, true);
                 }
                 result.height += 16;
             }
@@ -394,6 +394,6 @@ public class GuiItemDurability {
 
     public List<ItemStack> getTrinkets(LivingEntity player) {
         Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-        return component.map(trinketComponent -> trinketComponent.getEquipped(prdct -> true).stream().map(Pair::getRight).toList()).orElse(null);
+        return component.map(trinketComponent -> trinketComponent.getEquipped(prdct -> true).stream().map(Tuple::getB).toList()).orElse(null);
     }
 }

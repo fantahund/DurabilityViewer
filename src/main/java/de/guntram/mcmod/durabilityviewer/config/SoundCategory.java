@@ -5,20 +5,20 @@ import fi.dy.masa.malilib.util.StringUtils;
 
 public class SoundCategory implements IConfigOptionListEntry
 {
-    private final static net.minecraft.sound.SoundCategory[] allValues = net.minecraft.sound.SoundCategory.values();
+    private final static net.minecraft.sounds.SoundSource[] allValues = net.minecraft.sounds.SoundSource.values();
 
     private final String configString;
     private final String translationKey;
-    private final net.minecraft.sound.SoundCategory minecraft;
+    private final net.minecraft.sounds.SoundSource minecraft;
 
-    private SoundCategory(net.minecraft.sound.SoundCategory minecraft)
+    private SoundCategory(net.minecraft.sounds.SoundSource minecraft)
     {
         this.minecraft = minecraft;
         this.configString = this.minecraft.getName();
         this.translationKey = "soundCategory." + this.configString;
     }
 
-    public net.minecraft.sound.SoundCategory getInternal()
+    public net.minecraft.sounds.SoundSource getInternal()
     {
         return minecraft;
     }
@@ -61,12 +61,12 @@ public class SoundCategory implements IConfigOptionListEntry
 
     public static SoundCategory getDefault()
     {
-        return new SoundCategory(net.minecraft.sound.SoundCategory.PLAYERS);
+        return new SoundCategory(net.minecraft.sounds.SoundSource.PLAYERS);
     }
 
     public static SoundCategory fromStringStatic(String name)
     {
-        for (net.minecraft.sound.SoundCategory mode : allValues) {
+        for (net.minecraft.sounds.SoundSource mode : allValues) {
             if (mode.getName().equalsIgnoreCase(name)) {
                 return new SoundCategory(mode);
             }

@@ -1,7 +1,7 @@
 package de.guntram.mcmod.durabilityviewer.itemindicator;
 
 import de.guntram.mcmod.durabilityviewer.config.Configs;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public class ItemDamageIndicator implements ItemIndicator {
 
@@ -19,10 +19,10 @@ public class ItemDamageIndicator implements ItemIndicator {
 
     @Override
     public String getDisplayValue() {
-        if (!(stack.isDamageable())) {
+        if (!(stack.isDamageableItem())) {
             return "";
         }
-        return calculateDisplayValue(stack.getMaxDamage(), stack.getDamage());
+        return calculateDisplayValue(stack.getMaxDamage(), stack.getDamageValue());
     }
 
     public static String calculateDisplayValue(int max, int dam) {
@@ -43,7 +43,7 @@ public class ItemDamageIndicator implements ItemIndicator {
     @Override
     public int getDisplayColor() {
         int max = stack.getMaxDamage();
-        int cur = stack.getDamage();
+        int cur = stack.getDamageValue();
         return calculateDisplayColor(max, cur);
     }
 
@@ -59,12 +59,12 @@ public class ItemDamageIndicator implements ItemIndicator {
 
     @Override
     public boolean isEmpty() {
-        return stack.isEmpty() || (stack.getMaxDamage() - stack.getDamage() > stack.getMaxDamage() * Configs.Settings.HideDamageOverPercent.getIntegerValue() / 100);
+        return stack.isEmpty() || (stack.getMaxDamage() - stack.getDamageValue() > stack.getMaxDamage() * Configs.Settings.HideDamageOverPercent.getIntegerValue() / 100);
     }
 
     @Override
     public boolean isItemStackDamageable() {
-        return alwaysAssumeDamageable || stack.isDamageable();
+        return alwaysAssumeDamageable || stack.isDamageableItem();
     }
 
     @Override

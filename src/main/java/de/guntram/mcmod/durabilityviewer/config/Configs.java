@@ -15,9 +15,8 @@ import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.config.options.ConfigOptionList;
 import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
-import net.minecraft.text.Text;
-
 import java.io.File;
+import net.minecraft.network.chat.Component;
 
 public class Configs implements IConfigHandler {
 
@@ -25,20 +24,20 @@ public class Configs implements IConfigHandler {
     private static final int CONFIG_VERSION = 1;
 
     public static class Settings {
-        public static final ConfigBoolean ArmorAroundHotbar = new ConfigBoolean("ArmorAroundHotbar", false, Text.translatable("durabilityviewer.config.tt.armorhotbar").getString());
-        public static final ConfigOptionList HUDCorner = new ConfigOptionList("HUDCorner", Corner.BOTTOM_RIGHT, Text.translatable("durabilityviewer.config.tt.corner").getString());
-        public static final ConfigBoolean EffectDuration = new ConfigBoolean("EffectDuration", true, Text.translatable("durabilityviewer.config.tt.effectduration").getString());
-        public static final ConfigInteger HideDamageOverPercent = new ConfigInteger("HideDamageOverPercent", 100, 0, 100, true, Text.translatable("durabilityviewer.config.tt.hidedamagepercent").getString());
-        public static final ConfigInteger SoundBelowDurability = new ConfigInteger("SoundBelowDurability", 100, 1, 1500, true, Text.translatable("durabilityviewer.config.tt.mindurability").getString());
-        public static final ConfigInteger SoundBelowPercent = new ConfigInteger("SoundBelowPercent", 10, 1, 100, true, Text.translatable("durabilityviewer.config.tt.minpercent").getString());
-        public static final ConfigBoolean Percentages = new ConfigBoolean("Percentages", false, Text.translatable("durabilityviewer.config.tt.percentvalues").getString());
-        public static final ConfigBoolean SetWindowTitle = new ConfigBoolean("SetWindowTitle", true, Text.translatable("durabilityviewer.config.tt.setwindowtitle").getString());
-        public static final ConfigBoolean ShowAllTrinkets = new ConfigBoolean("ShowAllTrinkets", true, Text.translatable("durabilityviewer.config.tt.showalltrinkets").getString());
-        public static final ConfigInteger PercentToShowDamage = new ConfigInteger("PercentToShowDamage", 80, 0, 100, true, Text.translatable("durabilityviewer.config.tt.showdamagepercent").getString());
-        public static final ConfigBoolean ShowFreeInventorySlots = new ConfigBoolean("ShowFreeInventorySlots", true, Text.translatable("durabilityviewer.config.tt.showfreeslots").getString());
-        public static final ConfigColor TooltipColor = new ConfigColor("TooltipColor", "#54FB54", Text.translatable("durabilityviewer.config.tt.tooltipcolor").getString());
-        public static final ConfigOptionList WarningMode = new ConfigOptionList("WarningMode", WarnMode.SOUND, Text.translatable("durabilityviewer.config.tt.warnmode").getString());
-        public static final ConfigOptionList SoundCategory = new ConfigOptionList("SoundCategory", de.guntram.mcmod.durabilityviewer.config.SoundCategory.getDefault(), Text.translatable("durabilityviewer.config.tt.soundcategory").getString());
+        public static final ConfigBoolean ArmorAroundHotbar = new ConfigBoolean("ArmorAroundHotbar", false, Component.translatable("durabilityviewer.config.tt.armorhotbar").getString());
+        public static final ConfigOptionList HUDCorner = new ConfigOptionList("HUDCorner", Corner.BOTTOM_RIGHT, Component.translatable("durabilityviewer.config.tt.corner").getString());
+        public static final ConfigBoolean EffectDuration = new ConfigBoolean("EffectDuration", true, Component.translatable("durabilityviewer.config.tt.effectduration").getString());
+        public static final ConfigInteger HideDamageOverPercent = new ConfigInteger("HideDamageOverPercent", 100, 0, 100, true, Component.translatable("durabilityviewer.config.tt.hidedamagepercent").getString());
+        public static final ConfigInteger SoundBelowDurability = new ConfigInteger("SoundBelowDurability", 100, 1, 1500, true, Component.translatable("durabilityviewer.config.tt.mindurability").getString());
+        public static final ConfigInteger SoundBelowPercent = new ConfigInteger("SoundBelowPercent", 10, 1, 100, true, Component.translatable("durabilityviewer.config.tt.minpercent").getString());
+        public static final ConfigBoolean Percentages = new ConfigBoolean("Percentages", false, Component.translatable("durabilityviewer.config.tt.percentvalues").getString());
+        public static final ConfigBoolean SetWindowTitle = new ConfigBoolean("SetWindowTitle", true, Component.translatable("durabilityviewer.config.tt.setwindowtitle").getString());
+        public static final ConfigBoolean ShowAllTrinkets = new ConfigBoolean("ShowAllTrinkets", true, Component.translatable("durabilityviewer.config.tt.showalltrinkets").getString());
+        public static final ConfigInteger PercentToShowDamage = new ConfigInteger("PercentToShowDamage", 80, 0, 100, true, Component.translatable("durabilityviewer.config.tt.showdamagepercent").getString());
+        public static final ConfigBoolean ShowFreeInventorySlots = new ConfigBoolean("ShowFreeInventorySlots", true, Component.translatable("durabilityviewer.config.tt.showfreeslots").getString());
+        public static final ConfigColor TooltipColor = new ConfigColor("TooltipColor", "#54FB54", Component.translatable("durabilityviewer.config.tt.tooltipcolor").getString());
+        public static final ConfigOptionList WarningMode = new ConfigOptionList("WarningMode", WarnMode.SOUND, Component.translatable("durabilityviewer.config.tt.warnmode").getString());
+        public static final ConfigOptionList SoundCategory = new ConfigOptionList("SoundCategory", de.guntram.mcmod.durabilityviewer.config.SoundCategory.getDefault(), Component.translatable("durabilityviewer.config.tt.soundcategory").getString());
 
         public static final ImmutableList<IConfigBase> SETTINGS = ImmutableList.of(
                 ArmorAroundHotbar,

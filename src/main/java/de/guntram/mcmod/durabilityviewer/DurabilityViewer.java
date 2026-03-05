@@ -5,13 +5,14 @@ import de.guntram.mcmod.durabilityviewer.config.Configs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.resources.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_H;
+
+import com.mojang.blaze3d.platform.InputConstants;
 
 public class DurabilityViewer implements ClientModInitializer {
     public static final String MODID = "durabilityviewer";
@@ -19,7 +20,7 @@ public class DurabilityViewer implements ClientModInitializer {
 
     public static DurabilityViewer instance;
     private static String changedWindowTitle;
-    private KeyBinding showHide;
+    private KeyMapping showHide;
     public static final Logger LOGGER = LogManager.getLogger("DurabilityViewer");
 
     @Override
@@ -41,14 +42,14 @@ public class DurabilityViewer implements ClientModInitializer {
     }
 
     public void processKeyBinds() {
-        if (showHide.wasPressed()) {
+        if (showHide.consumeClick()) {
             GuiItemDurability.toggleVisibility();
         }
     }
 
     public void setKeyBindings() {
-        final KeyBinding.Category category = KeyBinding.Category.create(Identifier.of("key.categories.durabilityviewer")); //FIXME 1.21.10
-        KeyBindingHelper.registerKeyBinding(showHide = new KeyBinding("key.durabilityviewer.showhide", InputUtil.Type.KEYSYM, GLFW_KEY_H, category));
+        final KeyMapping.Category category = KeyMapping.Category.register(Identifier.parse("key.categories.durabilityviewer")); //FIXME 1.21.10
+        KeyBindingHelper.registerKeyBinding(showHide = new KeyMapping("key.durabilityviewer.showhide", InputConstants.Type.KEYSYM, GLFW_KEY_H, category));
         ClientTickEvents.END_CLIENT_TICK.register(e -> processKeyBinds());
     }
 }
