@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import de.guntram.mcmod.durabilityviewer.DurabilityViewerConstants;
 import de.guntram.mcmod.durabilityviewer.client.gui.Corner;
 import fi.dy.masa.malilib.config.ConfigUtils;
 import fi.dy.masa.malilib.config.IConfigBase;
@@ -85,7 +86,7 @@ public class Configs implements IConfigHandler {
 
             JsonUtils.writeJsonToFile(root, new File(dir, CONFIG_FILE_NAME));
 
-            //DurabilityViewer.LOGGER.info("[DurabilityViewer] Config Saved");//FIXME
+            DurabilityViewerConstants.getLOGGER().info("[DurabilityViewer] Config Saved");
         }
     }
 

@@ -5,6 +5,7 @@
  */
 package de.guntram.mcmod.durabilityviewer.sound;
 
+import de.guntram.mcmod.durabilityviewer.DurabilityViewerConstants;
 import de.guntram.mcmod.durabilityviewer.config.Configs;
 import de.guntram.mcmod.durabilityviewer.config.SoundCategory;
 import net.minecraft.client.Minecraft;
@@ -29,7 +30,7 @@ public class ItemBreakingWarner {
         Identifier location;
 
         if (sound == null) {
-            location = Identifier.fromNamespaceAndPath("DurabilityViewer.MODID", "tool_breaking"); //FIOXME
+            location = Identifier.fromNamespaceAndPath(DurabilityViewerConstants.MOD_ID, "tool_breaking");
             sound = SoundEvent.createVariableRangeEvent(location);
         }
     }
