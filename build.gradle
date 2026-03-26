@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.14-SNAPSHOT'
+    id 'fabric-loom' version '1.15-SNAPSHOT'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "2.8.7"
 }
@@ -31,15 +31,11 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
+
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
     modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-    //modImplementation include("fi.dy.masa.malilib:malilib-fabric-1.21.6-rc1:${project.malilib_version}")
-    //modImplementation("fi.dy.masa.malilib:malilib-fabric-1.21.7:${project.malilib_version}")
     modImplementation("com.github.sakura-ryoko:malilib:${project.malilib_version}")
 
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
@@ -66,13 +62,10 @@ jar {
 
 loom {
     accessWidenerPath = file("src/main/resources/durabilityviewer.accesswidener")
-    mixin {
-     setUseLegacyMixinAp(false)
-    }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
+    it.options.release = 25
 }
 
 tasks.publish.dependsOn build
