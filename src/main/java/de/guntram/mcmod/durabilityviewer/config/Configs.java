@@ -58,14 +58,14 @@ public class Configs implements IConfigHandler {
     }
 
     public static void loadFromFile() {
-        File configFile = new File(FileUtils.getConfigDirectoryAsPath().toFile(), CONFIG_FILE_NAME);
+        File configFile = new File(FileUtils.getConfigDirectory().toFile(), CONFIG_FILE_NAME);
 
         if (!configFile.exists()) {
             saveToFile();
         }
 
         if (configFile.exists() && configFile.isFile() && configFile.canRead()) {
-            JsonElement element = JsonUtils.parseJsonFile(configFile);
+            JsonElement element = fi.dy.masa.malilib.util.data.json.JsonUtils.parseJsonFile(configFile.toPath());
 
             if (element != null && element.isJsonObject()) {
                 JsonObject root = element.getAsJsonObject();
@@ -75,7 +75,7 @@ public class Configs implements IConfigHandler {
     }
 
     public static void saveToFile() {
-        File dir = FileUtils.getConfigDirectoryAsPath().toFile();
+        File dir = FileUtils.getConfigDirectory().toFile();
 
         if ((dir.exists() && dir.isDirectory()) || dir.mkdirs()) {
             JsonObject root = new JsonObject();
@@ -84,7 +84,7 @@ public class Configs implements IConfigHandler {
 
             root.add("config_version", new JsonPrimitive(CONFIG_VERSION));
 
-            JsonUtils.writeJsonToFile(root, new File(dir, CONFIG_FILE_NAME));
+            fi.dy.masa.malilib.util.data.json.JsonUtils.writeJsonToFile(root, new File(dir, CONFIG_FILE_NAME).toPath());
 
             DurabilityViewer.LOGGER.info("[DurabilityViewer] Config Saved");
         }

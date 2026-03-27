@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.15-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "2.8.7"
 }
@@ -32,14 +32,14 @@ repositories {
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
 
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    compileOnly("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-    modImplementation("com.github.sakura-ryoko:malilib:${project.malilib_version}")
+    implementation("com.github.sakura-ryoko:malilib:${project.malilib_version}")
 
-    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
-    modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_components_version}"
+    //implementation "dev.emi:trinkets:${project.trinkets_version}"
+    compileOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_components_version}"
 }
 
 processResources {
@@ -85,23 +85,4 @@ publishing {
             url "$projectDir/../../CommonMaven"
         }
     }
-}
-
-modrinth {
-    token = System.getenv("MODRINTH_TOKEN")
-    projectId = project.modrinth_id
-    versionNumber = project.mod_version
-    versionName = "DurabilityViewer ${project.mod_version}"
-    versionType = isMCVersionNonRelease() ? "beta" : "release"
-    changelog = file("changelog.md").text
-    uploadFile = remapJar
-    gameVersions = [ project.minecraft_version ]
-    loaders = [ "fabric" ]
-    dependencies {
-        required.project 'fabric-api'
-    }
-}
-
-boolean isMCVersionNonRelease() {
-    return project.minecraft_version.matches('^\\d\\dw\\d\\d[a-z]$') || project.minecraft_version.matches('\\d+\\.\\d+-(pre|rc)(\\d+)')
 }
