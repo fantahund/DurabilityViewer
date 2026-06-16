@@ -1,5 +1,5 @@
 plugins {
-    id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom' version '1.17-SNAPSHOT'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "2.8.7"
 }
@@ -36,7 +36,7 @@ dependencies {
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     compileOnly("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-    implementation("com.github.sakura-ryoko:malilib:${project.malilib_version}")
+    include implementation("com.github.sakura-ryoko:malilib:${project.malilib_version}")
 
     //implementation "dev.emi:trinkets:${project.trinkets_version}"
     compileOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_components_version}"

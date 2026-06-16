@@ -5,7 +5,6 @@
   "package": "de.guntram.mcmod.durabilityviewer.mixin",
   "target": "@env(DEFAULT)",
   "client": [
-    "PotionEffectsMixin",
     "WindowTitleMixin"
   ],
   "injectors": {
