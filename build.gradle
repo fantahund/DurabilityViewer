@@ -35,6 +35,8 @@ dependencies {
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     compileOnly("com.terraformersmc:modmenu:${project.modmenu_version}")
+    // So the config screen can actually be opened in runClient.
+    localRuntime("com.terraformersmc:modmenu:${project.modmenu_version}")
 
     include implementation("com.github.sakura-ryoko:malilib:${project.malilib_version}")
 

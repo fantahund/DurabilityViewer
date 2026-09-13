@@ -10,8 +10,6 @@ import net.minecraft.resources.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_H;
-
 import com.mojang.blaze3d.platform.InputConstants;
 
 public class DurabilityViewer implements ClientModInitializer {
@@ -49,7 +47,7 @@ public class DurabilityViewer implements ClientModInitializer {
 
     public void setKeyBindings() {
         final KeyMapping.Category category = KeyMapping.Category.register(Identifier.parse("key.categories.durabilityviewer")); //FIXME 1.21.10
-        KeyMappingHelper.registerKeyMapping(showHide = new KeyMapping("key.durabilityviewer.showhide", InputConstants.Type.KEYSYM, GLFW_KEY_H, category));
+        KeyMappingHelper.registerKeyMapping(showHide = new KeyMapping("key.durabilityviewer.showhide", InputConstants.getKey("key.keyboard.h").getValue(), category));
         ClientTickEvents.END_CLIENT_TICK.register(e -> processKeyBinds());
     }
 }

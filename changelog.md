@@ -1,2 +1,1 @@
-- Change Config GUI to MaliLib GUI
-- Old settings will not be applied
+- Update to Minecraft 26.3-rc-2
