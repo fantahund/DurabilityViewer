@@ -15,7 +15,7 @@
     "durabilityviewer.config.showalltrinkets": "Alle Trinkets zeigen",
     "durabilityviewer.config.percentvalues": "Prozentwerte",
     "durabilityviewer.config.warnmode": "Warnmodus",
-	"durabilityviewer.config.soundcategory": "Soundkategorie für den Warnton",
+    "durabilityviewer.config.soundcategory": "Soundkategorie für den Warnton",
     "durabilityviewer.config.tt.corner": "Ecke 0 bis 3 - Rechts unten, links unten, rechts oben, links oben",
     "durabilityviewer.config.tt.armorhotbar": "Rüstung um Hotbar zeigen (anstatt mit Werkzeugen)",
     "durabilityviewer.config.tt.tooltipcolor": "Minecraft Farbe 0.. 15",
@@ -28,7 +28,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Wenn Trinkets Mod installiert ist, auch Trinkets ohne Haltbarkeit/Schaden anzeigen",
     "durabilityviewer.config.tt.percentvalues": "Prozentwerte anstelle von absoluten Werten anzeigen",
     "durabilityviewer.config.tt.warnmode": "Wie soll gewarnt werden, wenn ein Gegenstand fast zerstört ist",
-	"durabilityviewer.config.tt.soundcategory": "In dieser Soundkategorie wird der Warnton abgespielt",
+    "durabilityviewer.config.tt.soundcategory": "In dieser Soundkategorie wird der Warnton abgespielt",
     "key.categories.durabilityviewer": "Haltbarkeitsansicht",
     "key.durabilityviewer.showhide": "Haltbarkeit zeigen/verstecken",
     "tooltip.durability": "Haltbarkeit %s",
@@ -36,5 +36,11 @@
     "durabilityviewer.config.warnmode.none": "Nichts",
     "durabilityviewer.config.warnmode.sound": "Nur Ton",
     "durabilityviewer.config.warnmode.visual": "Nur Visuell",
-    "durabilityviewer.config.warnmode.both": "Ton und Visuell"
+    "durabilityviewer.config.warnmode.both": "Ton und Visuell",
+    "durabilityviewer.config.group.display": "Anzeige",
+    "durabilityviewer.config.group.durability": "Haltbarkeitsanzeige",
+    "durabilityviewer.config.group.warning": "Bruchwarnung",
+    "durabilityviewer.config.group.misc": "Sonstiges",
+    "durabilityviewer.config.requires.sound": "Erfordert einen Warnmodus mit Ton",
+    "options.voxelconfig.value.enterText": "Wert eingeben"
 }

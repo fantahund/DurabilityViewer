@@ -149,7 +149,7 @@ public class GuiItemDurability {
         ItemIndicator chestplate = new ItemDamageIndicator(chestItem);
         ItemIndicator helmet = new ItemDamageIndicator(player.getItemBySlot(EquipmentSlot.HEAD));
         ItemIndicator arrows = null;
-        ItemIndicator invSlots = (Configs.Settings.ShowFreeInventorySlots.getBooleanValue() ? new InventorySlotsIndicator(minecraft.player.getInventory()) : null);
+        ItemIndicator invSlots = (Configs.Settings.showFreeInventorySlots ? new InventorySlotsIndicator(minecraft.player.getInventory()) : null);
 
         if (mainHandWarner.checkBreaks(player.getItemBySlot(EquipmentSlot.MAINHAND)))
             needToWarn = player.getItemBySlot(EquipmentSlot.MAINHAND);
@@ -180,7 +180,7 @@ public class GuiItemDurability {
             }
             LOGGER.debug("know about " + trinkets.length + " trinkets, invSize is " + equipped.size() + ", have " + trinketWarners.length + " warners");
             for (int i = 0; i < trinkets.length; i++) {
-                trinkets[i] = new ItemDamageIndicator(equipped.get(i), Configs.Settings.ShowAllTrinkets.getBooleanValue());
+                trinkets[i] = new ItemDamageIndicator(equipped.get(i), Configs.Settings.showAllTrinkets);
                 if (needToWarn == null && trinketWarners[i].checkBreaks(equipped.get(i))) {
                     needToWarn = equipped.get(i);
                 }
@@ -190,7 +190,7 @@ public class GuiItemDurability {
             trinkets = new ItemIndicator[0];
         }
 
-        WarnMode warnMode = (WarnMode) Configs.Settings.WarningMode.getOptionListValue();
+        WarnMode warnMode = Configs.Settings.warningMode;
         if (needToWarn != null) {
             if (warnMode == WarnMode.SOUND || warnMode == WarnMode.BOTH) {
                 ItemBreakingWarner.playWarningSound();
@@ -218,7 +218,7 @@ public class GuiItemDurability {
 
         Window mainWindow = Minecraft.getInstance().getWindow();
         RenderSize armorSize, toolsSize, trinketsSize;
-        if (Configs.Settings.ArmorAroundHotbar.getBooleanValue()) {
+        if (Configs.Settings.armorAroundHotbar) {
             armorSize = new RenderSize(0, 0);
         } else {
             armorSize = this.renderItems(context, 0, 0, false, RenderPos.left, 0, boots, leggings, colytra, chestplate, helmet);
@@ -230,12 +230,12 @@ public class GuiItemDurability {
         if (trinketsSize.height > totalHeight) {
             totalHeight = trinketsSize.height;
         }
-        if (trinketsSize.width == 0 && trinkets.length > 0 && Configs.Settings.ShowAllTrinkets.getBooleanValue()) {
+        if (trinketsSize.width == 0 && trinkets.length > 0 && Configs.Settings.showAllTrinkets) {
             trinketsSize.width = iconWidth + spacing * 2;
         }
         int xposArmor, xposTools, xposTrinkets, ypos;
 
-        Corner corner = (Corner) Configs.Settings.HUDCorner.getOptionListValue();
+        Corner corner = Configs.Settings.hudCorner;
         switch (corner) {
             case TOP_LEFT -> {
                 xposArmor = 5;
@@ -266,7 +266,7 @@ public class GuiItemDurability {
             }
         }
 
-        if (Configs.Settings.ArmorAroundHotbar.getBooleanValue()) {
+        if (Configs.Settings.armorAroundHotbar) {
             int leftOffset = -120;
             int rightOffset = 100;
             if (!player.getItemBySlot(EquipmentSlot.OFFHAND).isEmpty()) {
@@ -329,7 +329,7 @@ public class GuiItemDurability {
     }
 
     public void afterRenderStatusEffects(GuiGraphicsExtractor context, float partialTicks) {
-        if (Configs.Settings.EffectDuration.getBooleanValue()) {
+        if (Configs.Settings.effectDuration) {
             // a lot of this is copied from net/minecraft/client/gui/GuiIngame.java
             Window mainWindow = Minecraft.getInstance().getWindow();
             Collection<MobEffectInstance> collection = minecraft.player.getActiveEffects();

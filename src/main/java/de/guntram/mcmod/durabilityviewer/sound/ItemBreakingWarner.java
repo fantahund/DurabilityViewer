@@ -7,7 +7,6 @@ package de.guntram.mcmod.durabilityviewer.sound;
 
 import de.guntram.mcmod.durabilityviewer.DurabilityViewer;
 import de.guntram.mcmod.durabilityviewer.config.Configs;
-import de.guntram.mcmod.durabilityviewer.config.SoundCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
@@ -41,8 +40,8 @@ public class ItemBreakingWarner {
             return false;
         int newDurability = stack.getMaxDamage() - stack.getDamageValue();
         if (newDurability < lastDurability
-                && newDurability < Configs.Settings.SoundBelowDurability.getIntegerValue()
-                && newDurability * 100 / Configs.Settings.SoundBelowPercent.getIntegerValue() < stack.getMaxDamage()) {
+                && newDurability < Configs.Settings.soundBelowDurability
+                && newDurability * 100 / Configs.Settings.soundBelowPercent < stack.getMaxDamage()) {
             lastDurability = newDurability;
             return true;
         }
@@ -57,7 +56,7 @@ public class ItemBreakingWarner {
         }
         ClientLevel world = Minecraft.getInstance().level;
         if (world != null) {
-            world.playSound(player, player.blockPosition(), sound, ((SoundCategory) Configs.Settings.SoundCategory.getOptionListValue()).getInternal(), 100, 100);
+            world.playSound(player, player.blockPosition(), sound, Configs.Settings.soundCategory, 100, 100);
         }
     }
 }

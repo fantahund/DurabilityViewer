@@ -29,12 +29,12 @@ public class ItemDamageIndicator implements ItemIndicator {
         int cur = max - dam;
 
         int shown;
-        if (cur > max * Configs.Settings.PercentToShowDamage.getIntegerValue() / 100) {
+        if (cur > max * Configs.Settings.percentToShowDamage / 100) {
             shown = -dam;
         } else {
             shown = cur;
         }
-        if (Configs.Settings.Percentages.getBooleanValue()) {
+        if (Configs.Settings.percentages) {
             return String.format("%.1f%%", shown * 100.0 / max);
         }
         return String.valueOf(shown);
@@ -59,7 +59,7 @@ public class ItemDamageIndicator implements ItemIndicator {
 
     @Override
     public boolean isEmpty() {
-        return stack.isEmpty() || (stack.getMaxDamage() - stack.getDamageValue() > stack.getMaxDamage() * Configs.Settings.HideDamageOverPercent.getIntegerValue() / 100);
+        return stack.isEmpty() || (stack.getMaxDamage() - stack.getDamageValue() > stack.getMaxDamage() * Configs.Settings.hideDamageOverPercent / 100);
     }
 
     @Override

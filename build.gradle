@@ -29,6 +29,12 @@ repositories {
     mavenLocal()
 }
 
+configurations {
+    // Dependencies that get shaded into the final jar instead of being required separately.
+    shade
+    implementation.extendsFrom shade
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
 
@@ -38,7 +44,7 @@ dependencies {
     // So the config screen can actually be opened in runClient.
     localRuntime("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-    include implementation("com.github.sakura-ryoko:malilib:${project.malilib_version}")
+    shade "de.tobi:voxelconfig:${project.voxelconfig_version}"
 
     //implementation "dev.emi:trinkets:${project.trinkets_version}"
     compileOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_components_version}"
@@ -57,9 +63,18 @@ java {
 }
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
     from("LICENSE") {
         rename { "${it}_${project.archives_base_name}" }
     }
+
+    // VoxelConfig is not a mod, so it gets shaded into the jar instead of jar-in-jar'd,
+    // the same way VoxelMap bundles it.
+    from {
+        configurations.shade.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    exclude 'META-INF/MANIFEST.MF', 'META-INF/*.SF', 'META-INF/*.RSA', 'META-INF/*.DSA'
 }
 
 loom {

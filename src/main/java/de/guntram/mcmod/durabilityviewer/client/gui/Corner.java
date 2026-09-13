@@ -1,9 +1,8 @@
 package de.guntram.mcmod.durabilityviewer.client.gui;
 
-import fi.dy.masa.malilib.config.IConfigOptionListEntry;
-import fi.dy.masa.malilib.util.StringUtils;
+import net.minecraft.network.chat.Component;
 
-public enum Corner implements IConfigOptionListEntry {
+public enum Corner {
     BOTTOM_RIGHT("Bottom-Right", "durabilityviewer.config.bottom_right"),
     BOTTOM_LEFT("Bottom-Left", "durabilityviewer.config.bottom_left"),
     TOP_RIGHT("Top-Right", "durabilityviewer.config.top_right"),
@@ -33,45 +32,14 @@ public enum Corner implements IConfigOptionListEntry {
         this.translationKey = translationKey;
     }
 
-    @Override
     public String getStringValue()
     {
         return this.configString;
     }
 
-    @Override
-    public String getDisplayName()
+    public Component getDisplayName()
     {
-        return StringUtils.translate(this.translationKey);
-    }
-
-    @Override
-    public IConfigOptionListEntry cycle(boolean forward)
-    {
-        int id = this.ordinal();
-
-        if (forward)
-        {
-            if (++id >= values().length)
-            {
-                id = 0;
-            }
-        }
-        else
-        {
-            if (--id < 0)
-            {
-                id = values().length - 1;
-            }
-        }
-
-        return values()[id % values().length];
-    }
-
-    @Override
-    public Corner fromString(String name)
-    {
-        return fromStringStatic(name);
+        return Component.translatable(this.translationKey);
     }
 
     public static Corner fromStringStatic(String name)

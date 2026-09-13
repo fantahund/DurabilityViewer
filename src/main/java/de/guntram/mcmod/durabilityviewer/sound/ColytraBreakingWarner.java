@@ -38,8 +38,8 @@ public class ColytraBreakingWarner extends ItemBreakingWarner {
 
         int newDurability = elytraMaxDamage - damage;
         if (newDurability < lastDurability
-                && newDurability < Configs.Settings.SoundBelowDurability.getIntegerValue()
-                && newDurability * 100 / Configs.Settings.SoundBelowPercent.getIntegerValue() < elytraMaxDamage) {
+                && newDurability < Configs.Settings.soundBelowDurability
+                && newDurability * 100 / Configs.Settings.soundBelowPercent < elytraMaxDamage) {
             lastDurability = newDurability;
             return true;
         }

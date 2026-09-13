@@ -34,5 +34,11 @@
     "durabilityviewer.config.warnmode.none": "Nenhum",
     "durabilityviewer.config.warnmode.sound": "Somente som",
     "durabilityviewer.config.warnmode.visual": "Somente visual",
-    "durabilityviewer.config.warnmode.both": "Som e visual"
+    "durabilityviewer.config.warnmode.both": "Som e visual",
+    "durabilityviewer.config.group.display": "Display",
+    "durabilityviewer.config.group.durability": "Durability display",
+    "durabilityviewer.config.group.warning": "Breaking warning",
+    "durabilityviewer.config.group.misc": "Miscellaneous",
+    "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
+    "options.voxelconfig.value.enterText": "Enter a value"
 }

@@ -21,7 +21,7 @@ public class WindowTitleMixin {
 
     @Inject(method = "createTitle()Ljava/lang/String;", at = @At("HEAD"), cancellable = true)
     public final void getWindowTitle(CallbackInfoReturnable<String> cir) {
-        if (Configs.Settings.SetWindowTitle.getBooleanValue()) {
+        if (Configs.Settings.setWindowTitle) {
             if (DurabilityViewer.getWindowTitle() != null) {
                 cir.setReturnValue(DurabilityViewer.getWindowTitle());
             }

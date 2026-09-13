@@ -30,7 +30,7 @@ public class Events {
         System.out.println("Test1");
         System.out.println("Test1");
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
-            if (!Configs.Settings.SetWindowTitle.getBooleanValue())
+            if (!Configs.Settings.setWindowTitle)
                 return;
             Minecraft mc = Minecraft.getInstance();
             ServerData serverData = mc.getCurrentServer();
@@ -45,7 +45,7 @@ public class Events {
         });
 
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-            if (!Configs.Settings.SetWindowTitle.getBooleanValue())
+            if (!Configs.Settings.setWindowTitle)
                 return;
             Minecraft mc = Minecraft.getInstance();
             DurabilityViewer.setWindowTitle(mc.getUser().getName() + " not connected");

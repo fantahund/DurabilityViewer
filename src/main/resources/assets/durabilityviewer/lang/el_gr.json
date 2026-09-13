@@ -34,5 +34,11 @@
     "durabilityviewer.config.warnmode.none": "Τίποτα",
     "durabilityviewer.config.warnmode.sound": "Μόνο ήχος",
     "durabilityviewer.config.warnmode.visual": "Οπτικά μόνο",
-    "durabilityviewer.config.warnmode.both": "Ήχος και οπτικά"
+    "durabilityviewer.config.warnmode.both": "Ήχος και οπτικά",
+    "durabilityviewer.config.group.display": "Display",
+    "durabilityviewer.config.group.durability": "Durability display",
+    "durabilityviewer.config.group.warning": "Breaking warning",
+    "durabilityviewer.config.group.misc": "Miscellaneous",
+    "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
+    "options.voxelconfig.value.enterText": "Enter a value"
 }

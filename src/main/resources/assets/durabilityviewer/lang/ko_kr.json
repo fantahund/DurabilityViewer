@@ -34,5 +34,11 @@
     "durabilityviewer.config.warnmode.none": "없음",
     "durabilityviewer.config.warnmode.sound": "소리만",
     "durabilityviewer.config.warnmode.visual": "화면만",
-    "durabilityviewer.config.warnmode.both": "소리 및 화면"
+    "durabilityviewer.config.warnmode.both": "소리 및 화면",
+    "durabilityviewer.config.group.display": "Display",
+    "durabilityviewer.config.group.durability": "Durability display",
+    "durabilityviewer.config.group.warning": "Breaking warning",
+    "durabilityviewer.config.group.misc": "Miscellaneous",
+    "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
+    "options.voxelconfig.value.enterText": "Enter a value"
 }

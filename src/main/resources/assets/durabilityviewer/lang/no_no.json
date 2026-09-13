@@ -34,5 +34,11 @@
     "durabilityviewer.config.warnmode.none": "Ingen",
     "durabilityviewer.config.warnmode.sound": "Kun lyd",
     "durabilityviewer.config.warnmode.visual": "Kun visuell",
-    "durabilityviewer.config.warnmode.both": "Lyd og visuell"
+    "durabilityviewer.config.warnmode.both": "Lyd og visuell",
+    "durabilityviewer.config.group.display": "Display",
+    "durabilityviewer.config.group.durability": "Durability display",
+    "durabilityviewer.config.group.warning": "Breaking warning",
+    "durabilityviewer.config.group.misc": "Miscellaneous",
+    "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
+    "options.voxelconfig.value.enterText": "Enter a value"
 }

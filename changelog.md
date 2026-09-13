@@ -1,1 +1,4 @@
 - Update to Minecraft 26.3-rc-2
+- Replace the MaliLib config GUI with VoxelConfig (shaded in, no extra download)
+- MaliLib is no longer a dependency
+- Settings from the old durability-viewer.json are imported once into config/durabilityviewer.properties
