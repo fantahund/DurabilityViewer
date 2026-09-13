@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Kui sul on trinkets-ite mod: kuva kõik trinketid, isegi kui neil puudub vastupidavus",
     "durabilityviewer.config.tt.percentvalues": "Kuva täpsete väärtuste asemel protsendid",
     "durabilityviewer.config.tt.warnmode": "Kuidas hoiatada, kui ese hakkab purunema",
-    "key.categories.durabilityviewer": "Durability Viewer",
+    "key.category.durabilityviewer.controls.title": "Durability Viewer",
     "key.durabilityviewer.showhide": "Kuva/peida vastupidavuse indikaator",
     "tooltip.durability": "Vastupidavus %s",
     "durabilityviewer.subtitle.toolBreaking": "Ese hakkab purunema",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }

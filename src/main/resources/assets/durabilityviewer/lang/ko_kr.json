@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "장신구 모드의 경우 장신구가 내구성/손상이 없는 경우에도 모든 장신구를 표시하십시오.",
     "durabilityviewer.config.tt.percentvalues": "절대값 대신 백분율 표시",
     "durabilityviewer.config.tt.warnmode": "아이템이 부숴지려고 할 때의 경고 방법",
-    "key.categories.durabilityviewer": "내구성 뷰어",
+    "key.category.durabilityviewer.controls.title": "내구성 뷰어",
     "key.durabilityviewer.showhide": "내구성 표시 표시/숨기기",
     "tooltip.durability": "내구도 %s",
     "durabilityviewer.subtitle.toolBreaking": "곧 부서질 것 같은 아이템",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }

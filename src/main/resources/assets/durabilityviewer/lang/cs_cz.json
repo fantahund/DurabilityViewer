@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Pokud máte Trinkets mod, zobrazit všechny trinkety i v případě, že nemají životnost/poškození",
     "durabilityviewer.config.tt.percentvalues": "Zobrazit procenta namísto absolutních hodnot",
     "durabilityviewer.config.tt.warnmode": "Jak varovat když se má předmět rozbít",
-    "key.categories.durabilityviewer": "Prohlížeč Životnosti",
+    "key.category.durabilityviewer.controls.title": "Prohlížeč Životnosti",
     "key.durabilityviewer.showhide": "Zobrazit/skrýt zobrazení životnosti",
     "tooltip.durability": "Životnost %s",
     "durabilityviewer.subtitle.toolBreaking": "Nástroj těsně před rozbitím",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }

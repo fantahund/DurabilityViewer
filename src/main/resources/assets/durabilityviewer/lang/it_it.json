@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Se hai la mod trinkets, mostra tutti i trinket anche quando non hanno durabilità/danno",
     "durabilityviewer.config.tt.percentvalues": "Mostra le percentuali invece dei valori assoluti",
     "durabilityviewer.config.tt.warnmode": "Come avvertire quando un oggetto sta per rompersi",
-    "key.categories.durabilityviewer": "Visualizzatore di durabilità",
+    "key.category.durabilityviewer.controls.title": "Visualizzatore di durabilità",
     "key.durabilityviewer.showhide": "Mostra/nascondi il display della durabilità",
     "tooltip.durability": "Durabilità %s",
     "durabilityviewer.subtitle.toolBreaking": "Oggetto sta per rompersi",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }

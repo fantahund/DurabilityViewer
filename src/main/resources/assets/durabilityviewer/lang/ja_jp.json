@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Trinkets modをお持ちの場合、耐久性/ダメージがない場合でもすべての装身具を表示する",
     "durabilityviewer.config.tt.percentvalues": "絶対値の代わりにパーセンテージを表示",
     "durabilityviewer.config.tt.warnmode": "アイテム破損まで残りわずかの時の警告方法\n",
-    "key.categories.durabilityviewer": "耐久値ビューアー",
+    "key.category.durabilityviewer.controls.title": "耐久値ビューアー",
     "key.durabilityviewer.showhide": "耐久値表示の表示/非表示",
     "tooltip.durability": "耐久値 %s",
     "durabilityviewer.subtitle.toolBreaking": "アイテムが壊れそうです",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }

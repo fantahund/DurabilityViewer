@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Hvis du har Trinkets mod, vis alle pyntegjenstander selv om de ikke har holdbarhet/skade",
     "durabilityviewer.config.tt.percentvalues": "Vis prosent i stedet for absolutte verdier",
     "durabilityviewer.config.tt.warnmode": "Hvordan varsle når en gjenstand snart blir ødelagt",
-    "key.categories.durabilityviewer": "Holdbarhet viser",
+    "key.category.durabilityviewer.controls.title": "Holdbarhet viser",
     "key.durabilityviewer.showhide": "Vis/Skjul holdbarhetsvisning",
     "tooltip.durability": "Holdbarhet: %s",
     "durabilityviewer.subtitle.toolBreaking": "Gjenstand som snart blir ødelagt",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }

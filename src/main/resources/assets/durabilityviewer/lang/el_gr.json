@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Αν έχετε το trinkets mod, εμφανίστε όλα τα trinkets ακόμη και όταν δεν έχουν αντοχή/βλάβη",
     "durabilityviewer.config.tt.percentvalues": "Εμφάνιση ποσοστών αντί για απόλυτες τιμές",
     "durabilityviewer.config.tt.warnmode": "Πώς να προειδοποιηθήτε όταν ένα αντικείμενο πρόκειται να σπάσει",
-    "key.categories.durabilityviewer": "Προβολή Αντοχής",
+    "key.category.durabilityviewer.controls.title": "Προβολή Αντοχής",
     "key.durabilityviewer.showhide": "Εμφάνιση/απόκρυψη οθόνης αντοχής",
     "tooltip.durability": "Αντοχή %s",
     "durabilityviewer.subtitle.toolBreaking": "Αντικείμενο που πρόκειται να σπάσει",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }

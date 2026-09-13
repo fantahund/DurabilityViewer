@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Если у вас установлен мод \"trinkets\", показывать все предметы из этого мода, даже если они полностью целые",
     "durabilityviewer.config.tt.percentvalues": "Показывать проценты вместо точных значений",
     "durabilityviewer.config.tt.warnmode": "Предупреждение при малой прочности предмета",
-    "key.categories.durabilityviewer": "Durability Viewer",
+    "key.category.durabilityviewer.controls.title": "Durability Viewer",
     "key.durabilityviewer.showhide": "Показать/скрыть прочность",
     "tooltip.durability": "Прочность %s",
     "durabilityviewer.subtitle.toolBreaking": "Предмет вот-вот сломается",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }

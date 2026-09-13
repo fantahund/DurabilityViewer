@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Ако имате мод од ситница, покажите све ситнице чак и ако немају трајност / оштећења",
     "durabilityviewer.config.tt.percentvalues": "Прикажите проценте уместо апсолутних вредности",
     "durabilityviewer.config.tt.warnmode": "Како упозорити када ће се итем покварити",
-    "key.categories.durabilityviewer": "Трајност Виевер",
+    "key.category.durabilityviewer.controls.title": "Трајност Виевер",
     "key.durabilityviewer.showhide": "Прикажи / сакриј приказ трајности",
     "tooltip.durability": "Трајност %s",
     "durabilityviewer.subtitle.toolBreaking": "Предмет ће се сломити",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }

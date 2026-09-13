@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "打开此选项后，装备即使没掉耐久度也显示",
     "durabilityviewer.config.tt.percentvalues": "显示百分比而不是绝对值",
     "durabilityviewer.config.tt.warnmode": "在物品即将损坏时如何发出警告",
-    "key.categories.durabilityviewer": "耐久指示器",
+    "key.category.durabilityviewer.controls.title": "耐久指示器",
     "key.durabilityviewer.showhide": "显示/隐藏 耐久显示",
     "tooltip.durability": "耐久度 %s",
     "durabilityviewer.subtitle.toolBreaking": "物品即将损坏",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }

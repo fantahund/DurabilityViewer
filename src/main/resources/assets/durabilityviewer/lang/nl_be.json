@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Als je de trinkets mod hebt, laat alle trinkets zien zelfs als ze geen duurzaamheid of schade hebben",
     "durabilityviewer.config.tt.percentvalues": "Toon percentages in plaats van absolute waarden",
     "durabilityviewer.config.tt.warnmode": "Hoe te waarschuwen wanneer een voorwerp op het punt is om kapot te gaan",
-    "key.categories.durabilityviewer": "Duurzaamheid Viewer",
+    "key.category.durabilityviewer.controls.title": "Duurzaamheid Viewer",
     "key.durabilityviewer.showhide": "Weergeven/verbergen duurzaamheid scherm",
     "tooltip.durability": "Duurzaamheid %s",
     "durabilityviewer.subtitle.toolBreaking": "Item gaat breken",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }

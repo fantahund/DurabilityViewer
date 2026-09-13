@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Eğer Trinkets moduna sahipseniz, dayanıklılığı/hasarı olmasa bile tüm aksesuarları göster",
     "durabilityviewer.config.tt.percentvalues": "Kesin değerler yerine yüzdelik değerler göster",
     "durabilityviewer.config.tt.warnmode": "Bir eşya tükenmek üzereyken nasıl uyaracağını belirler",
-    "key.categories.durabilityviewer": "Dayanıklılık Göstergesi",
+    "key.category.durabilityviewer.controls.title": "Dayanıklılık Göstergesi",
     "key.durabilityviewer.showhide": "Dayanıklılık Göstergesi Göster/Gizle",
     "tooltip.durability": "Kalan Kullanım Ömrü: %s",
     "durabilityviewer.subtitle.toolBreaking": "Eşya kırılmak üzere",
@@ -40,5 +40,6 @@
     "durabilityviewer.config.group.warning": "Breaking warning",
     "durabilityviewer.config.group.misc": "Miscellaneous",
     "durabilityviewer.config.requires.sound": "Requires a warning mode that plays a sound",
-    "options.voxelconfig.value.enterText": "Enter a value"
+    "options.voxelconfig.value.enterText": "Enter a value",
+    "key.durabilityviewer.openconfig": "Open settings"
 }
