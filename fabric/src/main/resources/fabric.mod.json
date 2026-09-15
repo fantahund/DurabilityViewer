@@ -17,13 +17,14 @@
     "depends": {
         "fabricloader": ">=0.19.5",
         "fabric-api": ">=0.160.5",
-        "minecraft": ">=26.3"
+        "minecraft": "~26.3"
     },
     "recommends": {
         "modmenu": "*"
     },
     "name": "Durability Viewer",
     "description": "Shows various things about the game:\n- the remaining/missing durability on your armor and tools\n- the amount of arrows in your inventory when you're wielding a bow\n- the number of empty inventory slots\n- timeouts for status effects",
+    "license": "MIT",
     "icon": "icon.png",
     "authors": [
         "Giselbaer",
