@@ -1,4 +1,4 @@
-package de.guntram.mcmod.durabilityviewer.config;
+package de.guntram.mcmod.durabilityviewer.fabric;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

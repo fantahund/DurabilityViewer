@@ -5,11 +5,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.guntram.mcmod.durabilityviewer.DurabilityViewer;
 import de.guntram.mcmod.durabilityviewer.client.gui.Corner;
-import de.tobi.voxelconfig.ConfigFile;
-import de.tobi.voxelconfig.ConfigProvider;
-import de.tobi.voxelconfig.SettingsCategory;
-import de.tobi.voxelconfig.SettingsGroup;
-import de.tobi.voxelconfig.SettingsOption;
+import de.voxelmap.voxelconfig.ConfigFile;
+import de.voxelmap.voxelconfig.ConfigProvider;
+import de.voxelmap.voxelconfig.SettingsCategory;
+import de.voxelmap.voxelconfig.SettingsGroup;
+import de.voxelmap.voxelconfig.SettingsOption;
 import java.io.BufferedReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -17,7 +17,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 
@@ -46,7 +45,7 @@ public class Configs implements ConfigProvider {
     }
 
     private static Path configPath(String fileName) {
-        return FabricLoader.getInstance().getConfigDir().resolve(fileName);
+        return DurabilityViewer.platform().getConfigDir().resolve(fileName);
     }
 
     public static void loadFromFile() {

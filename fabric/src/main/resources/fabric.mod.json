@@ -4,25 +4,31 @@
     "version": "${version}",
     "environment": "client",
     "entrypoints": {
-        "client": [ "de.guntram.mcmod.durabilityviewer.DurabilityViewer" ],
-        "modmenu": [ "de.guntram.mcmod.durabilityviewer.config.ModMenuImpl" ]
+        "client": [
+            "de.guntram.mcmod.durabilityviewer.fabric.DurabilityViewerFabric"
+        ],
+        "modmenu": [
+            "de.guntram.mcmod.durabilityviewer.fabric.ModMenuImpl"
+        ]
     },
     "mixins": [
-      	"mixins.durabilityviewer.json"
+        "mixins.durabilityviewer.json"
     ],
-    "accessWidener" : "durabilityviewer.accesswidener",
     "depends": {
         "fabricloader": ">=0.19.5",
-        "fabric-api": ">=0.160.4",
-        "minecraft": ">=26.3-rc.2"
+        "fabric-api": ">=0.160.5",
+        "minecraft": ">=26.3"
     },
     "recommends": {
-        "modmenu" : "*"
+        "modmenu": "*"
     },
     "name": "Durability Viewer",
     "description": "Shows various things about the game:\n- the remaining/missing durability on your armor and tools\n- the amount of arrows in your inventory when you're wielding a bow\n- the number of empty inventory slots\n- timeouts for status effects",
     "icon": "icon.png",
-    "authors": [ "Giselbaer", "fanta" ],
+    "authors": [
+        "Giselbaer",
+        "fanta"
+    ],
     "contact": {
         "homepage": "https://modrinth.com/mod/durability-viewer-updated",
         "sources": "https://github.com/fantahund/DurabilityViewer",
