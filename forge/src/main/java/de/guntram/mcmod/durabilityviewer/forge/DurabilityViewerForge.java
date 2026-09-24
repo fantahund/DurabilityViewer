@@ -27,12 +27,16 @@ public class DurabilityViewerForge {
         });
 
         AddGuiOverlayLayersEvent.BUS.addListener(event -> {
+            // The vanilla layers live in nested stacks, so each one has to be
+            // named - addAbove without a stack only searches the root.
             ForgeLayeredDraw layers = event.getLayeredDraw();
-            layers.addAbove(ForgeLayeredDraw.POTION_EFFECTS,
+            layers.addAbove(ForgeLayeredDraw.PRE_SLEEP_STACK,
                     Identifier.fromNamespaceAndPath(DurabilityViewer.MODID, "durabilityeffecthudlayer"),
+                    ForgeLayeredDraw.POTION_EFFECTS,
                     (graphics, deltaTracker) -> ClientHooks.renderAfterStatusEffects(graphics));
-            layers.addAbove(ForgeLayeredDraw.ITEM_HOTBAR,
+            layers.addAbove(ForgeLayeredDraw.HOTBAR_AND_DECOS,
                     Identifier.fromNamespaceAndPath(DurabilityViewer.MODID, "durabilityhotbarhudlayer"),
+                    ForgeLayeredDraw.ITEM_HOTBAR,
                     (graphics, deltaTracker) -> ClientHooks.renderAfterHotbar(graphics));
         });
 

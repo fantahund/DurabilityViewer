@@ -14,7 +14,4 @@ pluginManagement {
 include("common")
 include("fabric")
 include("neoforge")
-// Forge has not released for 26.3 yet. :forge only consumes :common, so
-// uncommenting this line is all it takes once it does - check forgeVersion in
-// build.gradle.kts first.
-//include("forge")
+include("forge")

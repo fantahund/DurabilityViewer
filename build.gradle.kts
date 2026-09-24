@@ -1,22 +1,21 @@
 plugins {
     id("java")
-    id("net.fabricmc.fabric-loom") version "1.17-SNAPSHOT" apply false
+    id("net.fabricmc.fabric-loom") version "1.18-SNAPSHOT" apply false
     id("net.neoforged.moddev") version "2.0.147" apply false
-    id("net.minecraftforge.gradle") version "7.0.17" apply false
+    id("net.minecraftforge.gradle") version "7.0.40" apply false
+    id("com.gradleup.shadow") version "9.6.1" apply false
 }
 
 val minecraftVersion by extra { "26.3" }
 val fabricVersion by extra { "0.19.5" }
-val fabricApiVersion by extra { "0.160.5+26.3" }
-val modMenuVersion by extra { "21.0.0-beta.1" }
+val fabricApiVersion by extra { "0.161.0+26.3" }
+val modMenuVersion by extra { "21.0.0" }
 val voxelConfigVersion by extra { "1.0.2" }
 
-// Forge has not released for 26.3 yet, so :forge stays out of
-// settings.gradle.kts - this follows their version scheme but is a guess.
-val forgeVersion by extra { "66.0.0" }
-val neoForgeVersion by extra { "26.3.0.0-beta" }
+val forgeVersion by extra { "66.0.3" }
+val neoForgeVersion by extra { "26.3.0.16-beta" }
 
-val durabilityViewerVersion by extra { "1.13.0" }
+val durabilityViewerVersion by extra { "1.13.1" }
 val fullVersion by extra { "${minecraftVersion}-${durabilityViewerVersion}" }
 
 tasks.jar {
@@ -37,6 +36,10 @@ allprojects {
         maven(url = "https://api.modrinth.com/maven") {
             name = "Modrinth"
             content { includeGroup("maven.modrinth") }
+        }
+        maven {
+            name = "Brokkonaut"
+            url = uri("https://www.iani.de/nexus/content/groups/public/")
         }
     }
 

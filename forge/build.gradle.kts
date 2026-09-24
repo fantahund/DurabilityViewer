@@ -1,5 +1,6 @@
 plugins {
     id("net.minecraftforge.gradle")
+    id("com.gradleup.shadow")
 }
 
 val minecraftVersion = rootProject.extra["minecraftVersion"] as String
@@ -67,9 +68,20 @@ tasks.processResources {
     }
 }
 
+// Forge loads every mod as a JPMS module, and two modules may not contain the
+// same package. VoxelMap also bundles VoxelConfig, so a plain copy crashes with
+// "Modules voxelmap and durabilityviewer export package de.voxelmap.voxelconfig".
+// Relocating our copy into our own package avoids the split package.
 tasks.jar {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveClassifier.set("slim")
+}
+
+tasks.shadowJar {
+    archiveClassifier.set("")
     destinationDirectory.set(rootDir.resolve("build").resolve("libs"))
+    configurations.set(listOf(shade))
+    relocate("de.voxelmap.voxelconfig", "de.guntram.mcmod.durabilityviewer.shadow.voxelconfig")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     manifest {
         attributes["MixinConfigs"] = "mixins.durabilityviewer.json"
@@ -78,8 +90,11 @@ tasks.jar {
     from(rootDir.resolve("LICENSE")) {
         rename { "${it}_durabilityviewer" }
     }
-    from({ shade.map { if (it.isDirectory) it else zipTree(it) } })
-    exclude("META-INF/MANIFEST.MF", "META-INF/*.SF", "META-INF/*.RSA", "META-INF/*.DSA")
+    exclude("META-INF/*.SF", "META-INF/*.RSA", "META-INF/*.DSA", "module-info.class")
+}
+
+tasks.assemble {
+    dependsOn(tasks.shadowJar)
 }
 
 tasks.withType<Test> {
