@@ -1,7 +1,8 @@
-- Update to Minecraft 26.3-rc-2
+- Update to Minecraft 26.3
 - Replace the MaliLib config GUI with VoxelConfig (shaded in, no extra download)
 - MaliLib is no longer a dependency
 - Settings from the old durability-viewer.json are imported once into config/durabilityviewer.properties
 - New key binding to open the settings screen (unbound by default), so the settings are reachable without ModMenu
 - Fix the key binding category showing a raw translation key instead of the mod name
-- Requires ModMenu 21.0.0-beta.1 or later for the mod list entry (earlier versions do not support 26.3)
+- Split into common/fabric/neoforge modules, so there is now a NeoForge build for 26.3 as well
+- Forge is not built yet; it has not released for 26.3

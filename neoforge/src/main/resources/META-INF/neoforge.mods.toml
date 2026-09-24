@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="[2,)"
+license="MIT"
+issueTrackerURL="https://github.com/fantahund/DurabilityViewer/issues"
+
+[[mods]]
+modId="durabilityviewer"
+version="${version}"
+displayName="Durability Viewer"
+iconFile="icon.png"
+displayURL="https://modrinth.com/mod/durability-viewer-updated"
+authors="Giselbaer, fanta"
+description='''
+Shows various things about the game:
+- the remaining/missing durability on your armor and tools
+- the amount of arrows in your inventory when you're wielding a bow
+- the number of empty inventory slots
+- timeouts for status effects
+'''
+
+[[dependencies.durabilityviewer]]
+modId="neoforge"
+type="required"
+versionRange="[26.3.0.0-beta,)"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.durabilityviewer]]
+modId="minecraft"
+type="required"
+versionRange="[26.3,26.4)"
+ordering="NONE"
+side="CLIENT"
+
+[[mixins]]
+config="mixins.durabilityviewer.json"
