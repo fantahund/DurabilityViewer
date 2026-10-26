@@ -15,9 +15,15 @@
         "mixins.durabilityviewer.json"
     ],
     "depends": {
+<<<<<<< HEAD:fabric/src/main/resources/fabric.mod.json
         "fabricloader": ">=0.19.5",
         "fabric-api": ">=0.160.5",
         "minecraft": "~26.3"
+=======
+        "fabric": "*",
+        "minecraft": "*",
+        "malilib": "*"
+>>>>>>> 9ce1560 (add malili depend):src/main/resources/fabric.mod.json
     },
     "recommends": {
         "modmenu": "*"
